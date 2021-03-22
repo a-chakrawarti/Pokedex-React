@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Pagination from "./Pagination";
+import capitalize from "../utils/capitalize";
 
 const PokeList = () => {
-  const limit = 10;
-  const [lists, setList] = useState([]);
+  const LIMIT = 10;
+  const [results, setResult] = useState([]);
   const [nextPage, setNextPage] = useState("");
   const [previousPage, setPreviousPage] = useState("");
   const [currentPage, setCurrentPage] = useState(
-    `https://pokeapi.co/api/v2/pokemon?offset=0&limit=${limit}`
+    `https://pokeapi.co/api/v2/pokemon?offset=0&limit=${LIMIT}`
   );
   const [pageNumber, setPageNumber] = useState(0);
 
@@ -21,7 +22,7 @@ const PokeList = () => {
 
       setNextPage(next);
       setPreviousPage(previous);
-      setList(results);
+      setResult(results);
     };
     fetchList();
   }, [currentPage]);
@@ -37,17 +38,19 @@ const PokeList = () => {
   };
 
   return (
-    <>
-      <div>
-        {lists.map((pokemon, index) => {
-          const idx = pageNumber * 10 + (index + 1);
+    <div className="main">
+      <div className="body-style flex-container">
+        {results.map((result, index) => {
+          const idx = pageNumber * LIMIT + (index + 1);
           return (
-            <Link key={index + 1} to={`/pokemon/${idx}`}>
-              <div key={index + 1}>
-                <span>#{idx}</span>
-                <span>{pokemon.name}</span>
-              </div>
-            </Link>
+            <div className="cards" key={idx}>
+              <Link key={idx} to={`/pokemon/${idx}`}>
+                <span className="number-tag">#{idx}</span>
+                <span className="poke-name">
+                  {capitalize(`${result.name}`)}
+                </span>
+              </Link>
+            </div>
           );
         })}
       </div>
@@ -55,7 +58,7 @@ const PokeList = () => {
         gotoNextPage={nextPage ? gotoNextPage : null}
         gotoPreviousPage={previousPage ? gotoPreviousPage : null}
       />
-    </>
+    </div>
   );
 };
 

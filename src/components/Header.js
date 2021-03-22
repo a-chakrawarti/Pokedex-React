@@ -1,7 +1,12 @@
 import React from "react";
 
 const Header = () => {
-  return <div>Header</div>;
+  return (
+    <header>
+      <div>Ultra Pokédex</div>
+      <p>Gotta catch'em all!</p>
+    </header>
+  );
 };
 
 export default Header;

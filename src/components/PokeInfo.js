@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import capitalize from "../utils/capitalize";
 import { useParams } from "react-router-dom";
 const PokeInfo = () => {
   const [ability, setAbility] = useState([]);
@@ -39,30 +40,40 @@ const PokeInfo = () => {
   //   console.log("Moves List: ", movesList.moves);
 
   return (
-    <>
-      <div>
+    <div className="info-body">
+      <div className="attribute-block">
         <img src={imageURL} alt="pokemon" />
+        <div className="attribute-info">
+          <span className="title-tag">{capitalize(`${name}`)}</span>
+          <span>
+            Height: <span className="attribute-data">{height} cm</span>
+          </span>
+          <span>
+            Weight: <span className="attribute-data">{weight} kg</span>
+          </span>
+          <div className="flex-list-row">
+            Abilities:
+            {ability.map((item, index) => (
+              <span className="attribute-data ability-tag" key={index}>
+                {item.ability.name}
+              </span>
+            ))}
+          </div>
+        </div>
       </div>
-      <div>
-        <h3>{name}</h3>
-        <h3>Height: {height} cm </h3>
-        <h3>Weight: {weight} kg</h3>
-        <h3>
-          Abilities:
-          {ability.map((item, index) => (
-            <span key={index}>{item.ability.name}</span>
-          ))}
-        </h3>
-      </div>
-      <div>
-        <h2>Moves</h2>
-        <ul>
+      <details className="moves">
+        <summary className="title-tag">Moves ( {movesList.length} )</summary>
+        <div className="flex-list-row">
           {movesList.map((item, index) => {
-            return <li key={index}>{item.move.name}</li>;
+            return (
+              <span className="moves-tag" key={index}>
+                {item.move.name}
+              </span>
+            );
           })}
-        </ul>
-      </div>
-    </>
+        </div>
+      </details>
+    </div>
   );
 };
 
