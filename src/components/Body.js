@@ -8,8 +8,8 @@ const Body = () => {
     <>
       <Router>
         <Switch>
-          <Route exact path="/" component={PokeList}></Route>
-          <Route path="/pokemon/:id" component={PokeInfo}></Route>
+          <Route exact path="/Pokedex-React" component={PokeList}></Route>
+          <Route path="/Pokedex-React/pokemon/:id" component={PokeInfo}></Route>
         </Switch>
       </Router>
     </>

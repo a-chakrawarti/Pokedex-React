@@ -44,7 +44,7 @@ const PokeList = () => {
           const idx = pageNumber * LIMIT + (index + 1);
           return (
             <div className="cards" key={idx}>
-              <Link key={idx} to={`/pokemon/${idx}`}>
+              <Link key={idx} to={`/Pokedex-React/pokemon/${idx}`}>
                 <span className="number-tag">#{idx}</span>
                 <span className="poke-name">
                   {capitalize(`${result.name}`)}
